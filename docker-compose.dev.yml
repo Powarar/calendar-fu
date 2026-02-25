@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - 4040
+    ports:
+      - "4040:4040"
+    environment:
+      APP_API_ADDRESS: 0.0.0.0
+      APP_REDIS: redis://redis/0
+      APP_DEBUG: "true"
+
+  redis:
+    image: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    expose:
+      - 6379
+    ports:
+      - 6379:6379

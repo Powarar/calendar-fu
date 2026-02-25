@@ -1,0 +1,2 @@
+black
+pytest~=5.3.5
