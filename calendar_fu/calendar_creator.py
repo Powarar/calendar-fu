@@ -53,7 +53,7 @@ def create_calendar(
 
     calendar = ICalendar(
         name="Расписание Университета",
-        description="Расписание Финансового Университета schedule.fa.ru",
+        description="Расписание Финансового Университета",
         prodid="-//FU_calendar//FU calendar 1.0//RU",
         color="teal",
         url=url,

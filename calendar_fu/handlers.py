@@ -56,10 +56,16 @@ class CalendarView(BaseView):
             await self.cache.save(filename, calendar)
         else:
             calendar = await self.cache.get(filename)
+        
+        # Use the actual host from the request instead of hardcoded domain
+        host = self.request.headers.get('X-Forwarded-Host') or self.request.host
+        protocol = self.request.headers.get('X-Forwarded-Proto', 'https')
+        base_url = f"{protocol}://{host}"
+        
         return Response(
             body=create_calendar(
                 loads(calendar),
-                f"https://schedule.fa.ru/calendar/{type}/{id}",
+                f"{base_url}/calendar/{type}/{id}",
                 **params,
             ),
             content_type="text/calendar",
